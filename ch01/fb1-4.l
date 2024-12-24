@@ -12,15 +12,15 @@
 %}
 
 %%
-"+"     { printf("PLUS\n"); }
-"-"     { printf("MINUS\n"); }
-"*"     { printf("TIMES\n"); }
-"/"     { printf("DIVIDE\n"); }
-"|"     { printf("ABS\n"); }
-[0-9]+  { printf("NUMBER %s\n", yytext); }
-\n      { printf("NEWLINE\n"); }
+"+"     { return ADD; }
+"-"     { return SUB; }
+"*"     { return MUL; }
+"/"     { return DIV; }
+"|"     { return ABS; }
+[0-9]+  { yylval = atoi(yytext); return NUMBER; }
+\n      { return EOL; }
 [ \t]   { }
-.       { printf("Mystery character %s\n", yytext); }
+.       { printf("Mystery character %c\n", *yytext); }
 %%
 
 void main(int argc, char **argv) {
